@@ -149,4 +149,51 @@ npm run start
 npm i dotenv
 ```
 
+.env.localに設定
+```
+// .env.local
+PORT=3002
+#URL=http://localhost:3002
+API_KEY=env_local_key
+```
+
+.envと.env.localの使い分けについて
+一般的に、dotenvは以下の優先順位で環境変数を読み込みます（設定による）。
+
+process.env（既に存在する環境変数）
+
+.env.{NODE_ENV}.local (例: .env.development.local, .env.production.local)
+
+.env.local
+
+.env.{NODE_ENV} (例: .env.development, .env.production)
+
+.env
+
+.env: 全ての環境に共通のデフォルト値。通常はバージョン管理下に置かれません。
+
+.env.local: ローカル開発環境でのみ使用する設定。.envよりも優先されます。これも通常はバージョン管理下に置きません。
+
+.env.development, .env.production など: 特定の環境（開発環境、本番環境など）に合わせた設定。
+
+この例では、dotenv.config({ path: path.resolve(__dirname, '..', '.env.local') });と明示的に指定することで、確実に.env.localを読み込むようにしています。本番環境では、環境変数はDockerやCI/CDパイプラインなどで直接設定することが多いため、.envファイルは利用しないのが一般的です。
+
+## .env.development も読むように
+
+※windowsも考慮して以下も必要
+「'NODE_ENV' は、内部コマンドまたは外部コマンド、操作可能なプログラムまたはバッチ ファイルとして認識されていません。」になるので
+```
+npm install --save-dev cross-env
+```
+
+ファイルを作成
+```
+// .env.develpment
+PORT=3001
+URL=http://localhost:3001
+API_KEY=env_development_key
+```
+
+package.jsonスクリプトの修正:
+devスクリプトで「cross-env NODE_ENV=development」を設定します。
 

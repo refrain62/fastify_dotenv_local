@@ -1,12 +1,19 @@
 // src/server.ts
 import fastify, { FastifyInstance } from 'fastify';
 import dotenv from 'dotenv';
-import path, { parse } from 'path';
 
-// .env.local ファイルを読み込む
-// path.resolve(__dirname, '..', '.env.local') は
-// src/app.ts の親ディレクトリ（プロジェクトルート）にある .env.local を指定します。
-dotenv.config({ path: path.resolve(__dirname, '..', '.env.local') });
+// .env.* ファイルの読み込みをdotenvに任せる
+// NODE_ENV='development'の場合、.env.development.local -> .env.local -> .env.development -> .env の順で読み込まれます
+dotenv.config();
+
+const environment = process.env.NODE_ENV || 'production'; // NODE_ENVが設定されていない場合のデフォルト値
+console.log('NODE_ENV: ' + environment);
+
+// NODE_ENVが 'development' の時だけ実行する処理
+if (environment === 'development') {
+  // 開発時の処理
+  
+}
 
 // 環境変数の内容を変数に保持
 const PORT = process.env.PORT || 3000;
