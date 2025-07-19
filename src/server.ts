@@ -1,18 +1,22 @@
 // src/server.ts
 import fastify, { FastifyInstance } from 'fastify';
-import dotenv from 'dotenv';
+import dotenvFlow from 'dotenv-flow';
 
 // .env.* ファイルの読み込みをdotenvに任せる
 // NODE_ENV='development'の場合、.env.development.local -> .env.local -> .env.development -> .env の順で読み込まれます
-dotenv.config();
+dotenvFlow.config(
+  {
+    debug: process.env.NODE_ENV === 'development', // 開発環境でのみデバッグ情報を表示
+  }
+);
 
-const environment = process.env.NODE_ENV || 'production'; // NODE_ENVが設定されていない場合のデフォルト値
+const environment = process.env.NODE_ENV || 'default'; // NODE_ENVが設定されていない場合のデフォルト値
 console.log('NODE_ENV: ' + environment);
 
 // NODE_ENVが 'development' の時だけ実行する処理
 if (environment === 'development') {
   // 開発時の処理
-  
+
 }
 
 // 環境変数の内容を変数に保持
@@ -73,8 +77,8 @@ const start = async () => {
     
     // サーバーが起動したらコンソールにメッセージを表示
     console.log(`Server listening on port ${PORT}`);
-    console.log(`Database URL: ${URL}`);
-    console.log(`API Key: ${API_KEY ? 'Loaded' : 'Not Loaded'}`); // セキュリティのためAPIキーは直接表示しない
+    console.log(`URL: ${URL}`);
+    console.log(`API Key: ${API_KEY}`); // セキュリティのためAPIキーは直接表示しない
   } catch (err) {
     server.log.error(err);
     process.exit(1);
