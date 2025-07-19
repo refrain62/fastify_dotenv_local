@@ -8,5 +8,6 @@
     "skipLibCheck": true,         /* 型定義ファイルのチェックをスキップ */
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"]         /* コンパイル対象のファイル */
+  "include": ["src/**/*"],        /* コンパイル対象のファイル */
+  "exclude": ["node_modules", "dist"] /* コンパイルから除外するファイル */
 }

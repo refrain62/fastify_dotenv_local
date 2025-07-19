@@ -142,3 +142,11 @@ npm run start
 ```
 
 
+*****
+
+## dotenvの導入
+```
+npm i dotenv
+```
+
+
