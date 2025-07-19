@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es2020",          /* コンパイル後のECMAScriptバージョン */
+    "module": "commonjs",         /* モジュールシステム */
+    "outDir": "./dist",           /* コンパイル後のファイル出力先 */
+    "strict": true,               /* 厳格な型チェックを有効化 */
+    "esModuleInterop": true,      /* ESモジュールとの相互運用性を向上 */
+    "skipLibCheck": true,         /* 型定義ファイルのチェックをスキップ */
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"]         /* コンパイル対象のファイル */
+}
